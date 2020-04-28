@@ -15,7 +15,9 @@ world_data['features'].delete_if{|j| j['properties']['brk_name'] == 'United Stat
 
 us_data['features'].each{|n| n['properties']['gdp_md_est'] = 0}
 
-combine_hash = us_data['features'].concat(world_data['features']) 
+combine_hash = {"type": "FeatureCollection",
+                "features": world_data['features'] | us_data['features']
+                }
+
 
 File.write("CombinedGeoData.json",combine_hash.to_json)
-

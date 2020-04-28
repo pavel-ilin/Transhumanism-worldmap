@@ -3,6 +3,7 @@ import '../App.css';
 import { event, select, geoPath, geoMercator, min, max, scaleLinear } from "d3";
 import geoData from "../Utils/countries.geo.json";
 import usaGeo from "../Utils/USA.geo.json";
+import CombinedGeoData from "../Utils/CombinedGeoData.json";
 
 const GeoMap = () => {
         // const countries = []
@@ -16,20 +17,21 @@ const GeoMap = () => {
         //       dataArray.push(findCountry)
         //     }
         // })
-      for(let i = 0; geoData.features.length > i; i++){
-        if (geoData.features[i].properties.brk_name === 'United States'){
-           geoData.features.splice(i-1, i);
-        }
-      }
 
-      usaGeo.features.map(element => {
-        element.properties.gdp_md_est = 0
-      })      
+      // for(let i = 0; geoData.features.length > i; i++){
+      //   if (geoData.features[i].properties.brk_name === 'United States'){
+      //      geoData.features.splice(i-1, i);
+      //   }
+      // }
+
+      // usaGeo.features.map(element => {
+      //   element.properties.gdp_md_est = 0
+      // })      
   
-      let newGeoJSON = { 
-          "type" : "FeatureCollection",
-          "features": [... geoData.features, ... usaGeo.features]
-      }
+      // let newGeoJSON = { 
+      //     "type" : "FeatureCollection",
+      //     "features": [... geoData.features, ... usaGeo.features]
+      // }
 
         const svgRef = useRef()
         const [clickedCountry, setClickedCountry] = useState(null)
@@ -57,8 +59,8 @@ const GeoMap = () => {
         useEffect(() => {
           const svg = select(svgRef.current)
     
-          const minProp = min(geoData.features, feature => feature.properties.gdp_md_est);
-          const maxProp = max(geoData.features, feature => feature.properties.gdp_md_est);
+          const minProp = min(CombinedGeoData.features, feature => feature.properties.gdp_md_est);
+          const maxProp = max(CombinedGeoData.features, feature => feature.properties.gdp_md_est);
     
           const colorScale = scaleLinear()
             .domain([minProp, maxProp])
@@ -68,13 +70,13 @@ const GeoMap = () => {
           const height = 800
 
           const projection = geoMercator()
-            .fitSize([width, height], clickedCountry || newGeoJSON)
+            .fitSize([width, height], clickedCountry || CombinedGeoData)
             .precision(100);
     
           const pathGenerator = geoPath().projection(projection)
     
           svg.selectAll('.country')
-            .data(newGeoJSON.features)
+            .data(CombinedGeoData.features)
             .join('path')
             .attr('class', 'country')
             .attr("fill", feature => colorScale(feature.properties.gdp_md_est))
