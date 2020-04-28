@@ -1,10 +1,13 @@
 import React, { Fragment, useRef, useEffect, useState } from 'react';
 import { event, select, geoPath, geoMercator, min, max, scaleLinear } from "d3";
 import geoData from "./countries.geo.json";
+import usTopoData from "./states-topo.json";
+import countriesTopoData from "./countries-topo.json";
+
 import './App.css';
 
 const App = () => {
-    
+
         // const countries = []
         // const dataArray = []
     
@@ -16,7 +19,8 @@ const App = () => {
         //       dataArray.push(findCountry)
         //     }
         // })
-    
+        console.log(countriesTopoData)
+        
         const svgRef = useRef()
         const [clickedCountry, setClickedCountry] = useState(null)
         
