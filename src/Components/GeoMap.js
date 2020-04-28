@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import '../App.css';
 import { event, select, geoPath, geoMercator, min, max, scaleLinear } from "d3";
-import geoData from "../Utils/countries.geo.json";
-import usaGeo from "../Utils/USA.geo.json";
-import CombinedGeoData from "../Utils/CombinedGeoData.json";
+import geoData from "../utils/countries.geo.json";
+import usaGeo from "../utils/USA.geo.json";
+import CombinedGeoData from "../utils/CombinedGeoData.json";
 
 const GeoMap = () => {
         // const countries = []
@@ -17,21 +17,6 @@ const GeoMap = () => {
         //       dataArray.push(findCountry)
         //     }
         // })
-
-      // for(let i = 0; geoData.features.length > i; i++){
-      //   if (geoData.features[i].properties.brk_name === 'United States'){
-      //      geoData.features.splice(i-1, i);
-      //   }
-      // }
-
-      // usaGeo.features.map(element => {
-      //   element.properties.gdp_md_est = 0
-      // })      
-  
-      // let newGeoJSON = { 
-      //     "type" : "FeatureCollection",
-      //     "features": [... geoData.features, ... usaGeo.features]
-      // }
 
         const svgRef = useRef()
         const [clickedCountry, setClickedCountry] = useState(null)
@@ -64,7 +49,7 @@ const GeoMap = () => {
     
           const colorScale = scaleLinear()
             .domain([minProp, maxProp])
-            .range(["#ccc", "red"]);
+            .range(["#ccc", "orange"]);
     
           const width = 900
           const height = 800
