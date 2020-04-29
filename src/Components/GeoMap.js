@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import '../App.css';
 import { event, select, geoPath, geoMercator, min, max, scaleLinear } from "d3";
-import CombinedGeoData from "../utils/CombinedGeoData.json";
+import CombinedGeoData from "../CombinedGeoData.json";
 
 const GeoMap = () => {
         // const countries = []
