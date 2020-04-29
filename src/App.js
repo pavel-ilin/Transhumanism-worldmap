@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 import GeoMap from './Components/GeoMap'
 
 const App = () => {
