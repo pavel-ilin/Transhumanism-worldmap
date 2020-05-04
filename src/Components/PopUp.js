@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 
 const PopUp = (data) => {
-    console.log(data)
     return (
         <Fragment>
             {data.data.properties.ambasadorStatus === 1 ? 

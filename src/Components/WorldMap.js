@@ -96,10 +96,8 @@ const WorldMap = () => {
             .on("click", feature => { mapClick(feature) })
         }, [])
 
-        
           return (
                 <Fragment>
-
                   <Modal
                     isOpen={isOpen}
                     onRequestClose={closeModal}
@@ -108,7 +106,6 @@ const WorldMap = () => {
                   >
                     <PopUp data={clickData}/>
                   </Modal>
-
                  <svg style={{ width: '1000px', height: '800px' }} ref={svgRef}/>
                 </Fragment>
       )
