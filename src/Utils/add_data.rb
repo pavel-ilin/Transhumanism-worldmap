@@ -32,7 +32,7 @@ state_parties = [
     {"state": "New York" , "party": "New York Transhumanist Party", "url": "https://www.facebook.com/groups/239575473381213/"},
     {"state": "Texas" , "party": "Transhumanist Party of Texas", "url": "https://www.facebook.com/TXTPSC/"},
     {"state": "Virginia" , "party": "Transhumanist Party of Virginia", "url": "https://www.facebook.com/thpva/"},
-    {"state": "Washington, D.C." , "party": "Washington, D.C. Transhumanist Party", "url": "https://www.meetup.com/DC-Transhumanist-Party-Meetup/"},
+    {"state": "District of Columbia" , "party": "Washington, D.C. Transhumanist Party", "url": "https://www.meetup.com/DC-Transhumanist-Party-Meetup/"},
     {"state": "Washington" , "party": "Washington State Transhumanist Party", "url": "https://www.facebook.com/groups/2078467672258734/"},
 ]
 

@@ -52,6 +52,7 @@ const WorldMap = () => {
          }
 
          const mapClick = (data) => {
+           console.log(data)
            if(data.properties.present === 1){
             div.transition()        
             .duration(400)      
