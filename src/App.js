@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import GeoMap from './Components/GeoMap'
+import WorldMap from './Components/WorldMap'
 
 const App = () => {
 
           return (
             <Fragment>
-                <GeoMap />
+                <WorldMap />
             </Fragment>
       )
     }
