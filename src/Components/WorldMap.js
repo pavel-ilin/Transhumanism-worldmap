@@ -27,7 +27,7 @@ const WorldMap = () => {
           .style("opacity", 0);
         
         const mouseOver = (data) => {
-          if (data.properties.ambasadorStatus == 1){
+          if (data.properties.ambasadorStatus === 1){
             div.transition()
             .duration(200)
             .style("opacity", .9)
@@ -35,11 +35,11 @@ const WorldMap = () => {
               .style("left", (event.pageX) + "px")     
               .style("top", (event.pageY - 18) + "px");
           }
-          else if (data.properties.present == 1 && data.properties.ambasadorStatus == 0){
+          else if (data.properties.present === 1 && data.properties.ambasadorStatus === 0){
               div.transition()
               .duration(200)
               .style("opacity", .9)
-              div.html(`<a href="${data.properties.url}">${data.properties.party}</a>` )
+              div.html(`${data.properties.party}` )
                 .style("left", (event.pageX) + "px")     
                 .style("top", (event.pageY - 18) + "px");
           }
@@ -52,11 +52,14 @@ const WorldMap = () => {
          }
 
          const mapClick = (data) => {
+           if(data.properties.present === 1){
             div.transition()        
             .duration(400)      
-            .style("opacity", 0);   
+            .style("opacity", 0);  
+
           setClickData(data)
           setIsOpen(true)
+           }
          }
 
          const closeModal = () => {
@@ -91,19 +94,21 @@ const WorldMap = () => {
             .on('mouseover', feature => { mouseOver(feature) })
             .on('mouseout', feature => { mouseOut(feature) })
             .on("click", feature => { mapClick(feature) })
-        }, [mouseOver, mouseOut])
+        }, [])
 
         
           return (
                 <Fragment>
+
                   <Modal
                     isOpen={isOpen}
                     onRequestClose={closeModal}
                     style={modalStyle}
-                    contentLabel="Modal"
+                    ariaHideApp={false}
                   >
-                  <PopUp data={clickData}/>
-                </Modal>
+                    <PopUp data={clickData}/>
+                  </Modal>
+
                  <svg style={{ width: '1000px', height: '800px' }} ref={svgRef}/>
                 </Fragment>
       )
