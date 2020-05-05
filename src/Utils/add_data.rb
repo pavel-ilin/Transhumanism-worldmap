@@ -1,6 +1,7 @@
 require 'json'
 
 ambasadors = [
+{"country": "Argentina", 'ambasador': 'Christian Meniw'},
 {"country": "Belarus", 'ambasador': 'Vladislav Petrushenko'},
 {"country": "Brazil", 'ambasador': 'Keoma Ferreira Antonio'},
 {"country": "Bulgaria", 'ambasador': 'Angel Marchev, Sr.'},
