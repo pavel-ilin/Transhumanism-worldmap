@@ -49,14 +49,27 @@ end
 
 def add_ambassadors(data, ambasadors)
     index = 0
+    england = 1
     data['features'].each{|n|
-        if ambasadors[index][:country] == n['properties']['name']
+        p(index)
+        begin
+        if n['properties']['name'] == 'England'
+            n['properties']['present'] = 1
+            n['properties']['ambasadorStatus'] = 1
+            n['properties']['ambasador'] = ambasadors[index][:ambasador]
+            england += 1
+            if england >= 6
+                index += 1
+            end 
+        elsif ambasadors[index][:country] == n['properties']['name']
+            p(ambasadors[index][:country])
             n['properties']['present'] = 1
             n['properties']['ambasadorStatus'] = 1
             n['properties']['ambasador'] = ambasadors[index][:ambasador]
             index += 1
-        else
-            # p('Country not in: ' + n['properties']['name'])
+        end
+        rescue Exception => ex
+            p(ex)
         end
     }
 end

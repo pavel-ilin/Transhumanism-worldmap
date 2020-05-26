@@ -27,6 +27,7 @@ const WorldMap = () => {
           .style("opacity", 0);
         
         const mouseOver = (data) => {
+          console.log(data.properties)
           if (data.properties.ambasadorStatus === 1){
             div.transition()
             .duration(200)
@@ -106,6 +107,7 @@ const WorldMap = () => {
                   >
                     <PopUp data={clickData}/>
                   </Modal>
+                  <div>Transhumanism</div>
                  <svg style={{ width: '1000px', height: '800px' }} ref={svgRef}/>
                 </Fragment>
       )
