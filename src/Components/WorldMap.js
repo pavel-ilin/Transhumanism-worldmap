@@ -27,6 +27,7 @@ const WorldMap = () => {
           .style("opacity", 0);
         
         const mouseOver = (data) => {
+          console.log(data.properties)
           if (data.properties.ambasadorStatus === 1){
             div.transition()
             .duration(200)

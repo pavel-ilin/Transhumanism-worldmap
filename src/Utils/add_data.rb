@@ -39,6 +39,7 @@ state_parties = [
 
 json_file = File.open "CombinedGeoData.json"
 data = JSON.load json_file
+
 sorted_data = data['features'].sort_by{|n| [n['properties']['name'] ? 0 : 1, n['properties']['name']]}
 data['features'] = sorted_data
 
@@ -51,9 +52,9 @@ def add_ambassadors(data, ambasadors)
     data['features'].each{|n|
         if ambasadors[index][:country] == n['properties']['name']
             n['properties']['present'] = 1
+            n['properties']['ambasadorStatus'] = 1
             n['properties']['ambasador'] = ambasadors[index][:ambasador]
             index += 1
-            p(n['properties']['name'])
         else
             # p('Country not in: ' + n['properties']['name'])
         end
@@ -72,7 +73,6 @@ def add_state_data(data, state_parties)
     }
 end
 
-sort_data(data)
 add_present(data)
 add_ambassadors(data, ambasadors)
 add_state_data(data, state_parties)
