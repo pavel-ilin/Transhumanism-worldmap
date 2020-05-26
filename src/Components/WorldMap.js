@@ -27,7 +27,6 @@ const WorldMap = () => {
           .style("opacity", 0);
         
         const mouseOver = (data) => {
-          console.log(data.properties)
           if (data.properties.ambasadorStatus === 1){
             div.transition()
             .duration(200)
@@ -53,7 +52,6 @@ const WorldMap = () => {
          }
 
          const mapClick = (data) => {
-           console.log(data)
            if(data.properties.present === 1){
             div.transition()        
             .duration(400)      
