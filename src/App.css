@@ -1,5 +1,7 @@
 .App {
+  margin-top: 10px;
   text-align: center;
+  font-family: Rockwell;
 }
 
 .App-logo {
@@ -50,4 +52,12 @@ div.tooltip {
   to {
     transform: rotate(360deg);
   }
+}
+
+.map {
+  text-align: center;
+  width: 100%;
+  height: 800px;
+  display:block;
+  margin:0 auto;
 }

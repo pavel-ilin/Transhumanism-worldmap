@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, Fragment } from 'react';
-import { event, select, geoPath, geoMercator, min, max, scaleLinear } from "d3";
+import { event, select, geoPath, geoMercator, min, max, scaleLinear, zoom } from "d3";
 import Modal from 'react-modal';
 import '../App.css';
 import CombinedGeoData from "../Utils/CombinedGeoData.json";
@@ -36,7 +36,7 @@ const WorldMap = () => {
               .style("left", (event.pageX) + "px")     
               .style("top", (event.pageY - 18) + "px");
           }
-          else if (data.properties.present === 1 && data.properties.ambasadorStatus === 0){
+          else if (data.properties.present === 1 && !data.properties.ambasadorStatus){
               div.transition()
               .duration(200)
               .style("opacity", .9)
@@ -66,7 +66,7 @@ const WorldMap = () => {
          const closeModal = () => {
           setIsOpen(false);
         }
-
+        
         useEffect(() => {
           const svg = select(svgRef.current)
     
@@ -77,8 +77,8 @@ const WorldMap = () => {
             .domain([minProp, maxProp])
             .range(["#ccc", "orange"]);
     
-          const width = 900
-          const height = 800
+          const width = window.innerWidth
+          const height = window.innerHeight
 
           const projection = geoMercator()
             .fitSize([width, height], CombinedGeoData)
@@ -95,6 +95,10 @@ const WorldMap = () => {
             .on('mouseover', feature => { mouseOver(feature) })
             .on('mouseout', feature => { mouseOut(feature) })
             .on("click", feature => { mapClick(feature) })
+            .call(zoom()
+                  .on('zoom', () => {
+                    svg.attr("transform", event.transform)
+                 }))
         }, [])
 
           return (
@@ -107,8 +111,10 @@ const WorldMap = () => {
                   >
                     <PopUp data={clickData}/>
                   </Modal>
-                  <div>Transhumanism</div>
-                 <svg style={{ width: '1000px', height: '800px' }} ref={svgRef}/>
+                  <div className={'App'}>Transhumanism</div>
+                  <div className={'App'}> 
+                    <svg className={'map'} ref={svgRef}/>
+                  </div>
                 </Fragment>
       )
     }
