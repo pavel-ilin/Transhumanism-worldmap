@@ -1,6 +1,13 @@
+import firebase from '../../utils/firebaseConfig';
+
 export function login(user) {
-    return {
-      type: 'LOGIN',
-      payload: user,
-    };
+  firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+    .catch(err => {
+      console.log('Error: ', err);
+  });
+
+  return {
+    type: 'LOGIN',
+    payload: user,
+  };
   }
