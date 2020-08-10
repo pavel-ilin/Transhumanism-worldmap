@@ -3,11 +3,11 @@ const initialState = {
 };
 
 const user = (state = initialState, action) => {
-    switch (action.type) {
+  switch (action.type) {
       case "LOGIN":
         return {
           ...state,
-            user: action.user,
+            user: action.payload,
         };
       default:
         return state;

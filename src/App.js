@@ -11,14 +11,13 @@ if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
 const App = (props) => {
+  console.log(props.user)
   return (
     <Fragment>
       <Switch>
         <Route exact path='/'><Redirect to='/map' /></Route>
         <Route path="/map"><WorldMap /></Route>
-        <Route path="/login"><Login /></Route>
-        {props.user && <Route path="/admin"><Admin /></Route>}
-        {props.user && <Redirect to='/admin' />}
+        <Route path="/admin">{props.user ? <Admin /> : <Login />}</Route>
       </Switch>
     </Fragment>
   )
