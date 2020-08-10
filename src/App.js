@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { decode, encode } from 'base-64'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
+import firebase from './utils/firebaseConfig';
 
 import WorldMap from './components/WorldMap'
 import Login from './components/Login'
@@ -11,7 +12,6 @@ if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
 const App = (props) => {
-  console.log(props.user)
   return (
     <Fragment>
       <Switch>

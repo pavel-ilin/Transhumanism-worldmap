@@ -1,13 +1,14 @@
 const initialState = {
-    user: null,
+    user: localStorage.user,
 };
 
 const user = (state = initialState, action) => {
+  localStorage.user = action.payload
   switch (action.type) {
       case "LOGIN":
         return {
           ...state,
-            user: action.payload,
+            user: localStorage.user,
         };
       default:
         return state;
