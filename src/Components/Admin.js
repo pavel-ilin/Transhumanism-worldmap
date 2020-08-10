@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Admin = () => {
+const Admin = (props) => {
     return (
         <div>
             Admin
@@ -8,4 +9,10 @@ const Admin = () => {
     )
 }
 
-export default Admin
+const mapStateToProps = state => {
+    return {
+      user: state.user
+    };
+  };
+
+export default connect(mapStateToProps)(Admin)

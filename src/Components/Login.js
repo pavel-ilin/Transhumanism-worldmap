@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 
-const Login = () => {
+const Login = (props) => {
+    console.log(props)
     return (
         <div>
             hello
@@ -8,4 +10,10 @@ const Login = () => {
     )
 }
 
-export default Login
+const mapStateToProps = state => {
+    return {
+      user: state.user
+    };
+  };
+
+export default connect(mapStateToProps)(Login)

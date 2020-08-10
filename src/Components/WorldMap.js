@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, Fragment } from 'react';
 import { event, select, geoPath, geoMercator, min, max, scaleLinear, zoom } from "d3";
 import Modal from 'react-modal';
 import '../App.css';
-import CombinedGeoData from "../Utils/CombinedGeoData.json";
+import CombinedGeoData from "../utils/CombinedGeoData.json";
 import PopUp from './PopUp'
 
 const modalStyle = {
@@ -27,7 +27,6 @@ const WorldMap = () => {
           .style("opacity", 0);
         
         const mouseOver = (data) => {
-          console.log(data.properties)
           if (data.properties.ambasadorStatus === 1){
             div.transition()
             .duration(200)
