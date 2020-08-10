@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import '../App.css';
 
 const Admin = (props) => {
-    return (
-        <div>
-            Admin
-        </div>
-    )
+  return (
+    <div className='App'>
+      Admin
+    </div>
+  )
 }
 
 const mapStateToProps = state => {
