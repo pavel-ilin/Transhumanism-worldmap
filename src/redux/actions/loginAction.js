@@ -1,13 +1,9 @@
-import firebase from '../../utils/firebaseConfig';
-
-export function loginAction(email, password) {
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .catch(err => {
-      console.log('Error: ', err);
-  });
-  let currentUser = firebase.auth().currentUser
+import authFirebase from '../../helpers/authFirebase'
+export const loginAction = (currentUser) => {
   return {
     type: 'LOGIN',
     payload: currentUser,
   };
 }
+
+
