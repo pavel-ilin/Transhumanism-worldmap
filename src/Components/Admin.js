@@ -24,7 +24,24 @@ const Admin = (props) => {
   return (
     <div className='App'>
       <div>Admin</div>
-      <div>Form</div>
+      <div>
+        <div>
+          <label>Add ambassador</label>
+          <input type="text" placeholder="Enter name"></input>
+          <select name="countries" id="country-select">
+            <option value="">--Please choose an option--</option>
+          </select>
+          <button>Submit</button>
+        </div>
+        <div>
+         <label>Add US state</label> 
+         <input type="text" placeholder="Enter name"></input>
+         <select name="states" id="state-select">
+            <option value="">--Please choose an option--</option>
+          </select>
+          <button>Submit</button>
+        </div>
+      </div>
       <div><button onClick={signOut}>SignOut</button></div>
     </div>
   )
