@@ -1,8 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { decode, encode } from 'base-64'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import firebase from './utils/firebaseConfig';
+
+import actions from './redux/actions/actions'
 
 import WorldMap from './components/WorldMap'
 import Login from './components/Login'
@@ -13,10 +15,14 @@ if (!global.atob) { global.atob = decode }
 
 const App = (props) => {
   const [userData, setUserData] = useState(false)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
-      setUserData(user)
+      if(user){
+        dispatch(actions.loadData(user))
+        setUserData(user)
+      }
     });
   })
 

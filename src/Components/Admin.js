@@ -1,13 +1,25 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, connect } from 'react-redux';
 import '../App.css';
+import actions from '../redux/actions/actions'
 import firebase from '../utils/firebaseConfig';
 
 const Admin = (props) => {
+  const dispatch = useDispatch();
 
   const signOut = () => {
     firebase.auth().signOut();
+    dispatch(actions.logoutAction())
   }
+
+  useEffect(() => {
+    firebase.firestore().collection('map').get()
+    .then(r => {
+      r.docs.map(doc => {
+        console.log('LOG 1', doc.data());
+      });
+    })
+  })
 
   return (
     <div className='App'>

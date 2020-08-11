@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import '../App.css';
-// import actions from '../redux/actions/actions'
+import actions from '../redux/actions/actions'
 import firebase from '../utils/firebaseConfig';
 
 const Login = (props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const submitLogin = async () => {
     if (email !== '' && password !== '') {
@@ -15,8 +15,8 @@ const Login = (props) => {
       .catch(err => {
         console.log('Error: ', err);
       })
-      // let currentUser = await firebase.auth().currentUser
-      // dispatch(actions.loginAction(currentUser))
+      let currentUser = await firebase.auth().currentUser
+      dispatch(actions.loginAction(currentUser))
     }
     else {
       console.log('error')

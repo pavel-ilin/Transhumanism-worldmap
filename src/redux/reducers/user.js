@@ -3,9 +3,18 @@ const initialState = {
 };
 
 const user = (state = initialState, action) => {
-  // localStorage.user = action.payload
   switch (action.type) {
       case "LOGIN":
+        return {
+          ...state,
+            user: action.payload,
+        };
+        case "LOGOUT":
+        return {
+          ...state,
+            user: action.payload,
+        };
+        case "LOAD_DATA":
         return {
           ...state,
             user: action.payload,
