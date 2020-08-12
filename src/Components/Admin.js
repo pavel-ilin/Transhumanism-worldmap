@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import '../App.css';
 import actions from '../redux/actions/actions'
 import firebase from '../utils/firebaseConfig';
@@ -42,7 +43,7 @@ const Admin = (props) => {
           <button>Submit</button>
         </div>
       </div>
-      <div><button onClick={signOut}>SignOut</button></div>
+      <div><Link to='/login'><button onClick={signOut}>SignOut</button></Link></div>
     </div>
   )
 }

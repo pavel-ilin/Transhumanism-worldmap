@@ -3,6 +3,7 @@ import { event, select, geoPath, geoMercator, min, max, scaleLinear, zoom } from
 import Modal from 'react-modal';
 import '../App.css';
 import CombinedGeoData from "../utils/CombinedGeoData.json";
+import firebase from '../utils/firebaseConfig';
 import PopUp from './PopUp'
 
 const modalStyle = {
@@ -20,6 +21,20 @@ const WorldMap = () => {
         const svgRef = useRef()
         const [clickData, setClickData] = useState(null)
         const [isOpen, setIsOpen] = useState(false);
+        
+        const storage = firebase.storage()
+        const geodata = storage.ref().child("CombinedGeoData.json").getDownloadURL()
+        .then(function(url) {
+          var xhr = new XMLHttpRequest();
+          xhr.responseType = 'blob';
+          xhr.onload = function(event) {
+            var blob = xhr.response;
+          };
+          xhr.open('GET', url);
+          xhr.send();
+          console.log(url)
+        })
+
 
         let div = select("body")
           .append("div")   
