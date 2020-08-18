@@ -1,9 +1,8 @@
 import React, { useRef, useEffect, useState, Fragment } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { event, select, geoPath, geoMercator, min, max, scaleLinear, zoom } from "d3";
 import Modal from 'react-modal';
 import '../App.css';
-import actions from '../redux/actions/actions'
 import PopUp from './PopUp'
 
 const modalStyle = {
@@ -22,7 +21,6 @@ const WorldMap = (props) => {
   const [clickData, setClickData] = useState(null)
   const [isOpen, setIsOpen] = useState(false);
   const CombinedGeoData = props.geoData.geoData
-  const dispatch = useDispatch();
 
   let div = select("body")
     .append("div")   
@@ -70,10 +68,7 @@ const WorldMap = (props) => {
   }
 
   useEffect(() => {
-    if (!props.geoData.geoData) {
-      dispatch(actions.getGeoData())
-    }
-    else {
+    if (props.geoData.geoData) {
       const svg = select(svgRef.current)
       const minProp = min(CombinedGeoData.features, feature => feature.properties.present);
       const maxProp = max(CombinedGeoData.features, feature => feature.properties.present);
@@ -118,7 +113,7 @@ const WorldMap = (props) => {
       </div>
     </Fragment>
     )
-    }
+}
 
 const mapStateToProps = state => {
   return {

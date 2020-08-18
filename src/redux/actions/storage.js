@@ -6,6 +6,9 @@ export const getGeoData = () => {
         .then(function(url) {
             let ambassadors = []
             let states = []
+            let allCountries = []
+            let allStates = []
+
             firebase.firestore().collection('ambassadors').get() 
                     .then(amba => {
                         amba.forEach(item => {
@@ -20,6 +23,7 @@ export const getGeoData = () => {
                             states.push(state)
                         })
                     })
+                    
             fetch(url)
                 .then(r => r.json())
                 .then(resp => {
@@ -48,9 +52,21 @@ export const getGeoData = () => {
                             indexStates++
                         }
                     })
+                    geodata.features.forEach(item => {
+                        if (item.properties.NAME){
+                            allStates.push(item.properties.NAME)
+                        }
+                        else {
+                            allCountries.push(item.properties.name)
+                        }
+                        
+                    })
+
                     dispatch({
                         type: "GET_GEO_DATA",
                         payload: geodata,
+                        allStates: allStates,
+                        allCountries: allCountries,
                     })
                 })
     })

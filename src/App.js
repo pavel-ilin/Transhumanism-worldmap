@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import { decode, encode } from 'base-64'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import './App.css';
+import actions from './redux/actions/actions'
 
 import WorldMap from './components/WorldMap'
 import Login from './components/Login'
@@ -12,6 +13,11 @@ if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
 const App = (props) => {
+  const dispatch = useDispatch()
+  if(!props.geodata){
+    dispatch(actions.getGeoData())
+  }
+
   return (
     <Fragment>
       <Switch>
@@ -27,7 +33,8 @@ const App = (props) => {
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user
+    user: state.user.user,
+    geodata: state.storage.geoData
   };
 };
 

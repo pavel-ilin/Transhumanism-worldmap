@@ -5,13 +5,18 @@ import '../App.css';
 import actions from '../redux/actions/actions'
 import firebase from '../utils/firebaseConfig';
 
-const Admin = () => {
+const Admin = (props) => {
   const dispatch = useDispatch();
-
   const signOut = () => {
     localStorage.clear()
     firebase.auth().signOut();
     dispatch(actions.logoutAction())
+  }
+
+  const allCountries = () => {
+    return props.allCountries.map(item => {
+      return <option value={item}>{item}</option>
+    })
   }
 
   return (
@@ -23,6 +28,7 @@ const Admin = () => {
           <input type="text" placeholder="Enter name"></input>
           <select name="countries" id="country-select">
             <option value="">--Please choose an option--</option>
+            {allCountries()}
           </select>
           <button>Submit</button>
         </div>
@@ -42,7 +48,9 @@ const Admin = () => {
 
 const mapStateToProps = state => {
     return {
-      user: state.user
+      user: state.user,
+      allCountries: state.storage.allCountries,
+      allStates: state.storage.allStates
     };
   };
 
