@@ -32,7 +32,7 @@ const App = (props) => {
       <Switch>
         <Route exact path='/'><Redirect to='/map' /></Route>
         <Route path="/map"><WorldMap /></Route>
-        <Route path="/admin">{userData ? <Admin /> : <div className='App' >loading</div>}</Route>
+        {userData && <Route path="/admin">{userData ? <Admin /> : <div className='App' >loading</div>}</Route>}
         <Route path="/login">{props.user ? <Redirect to='/admin' /> : <Login />}</Route>
         <Route render={() => <Redirect to="/login" />} />
       </Switch>
