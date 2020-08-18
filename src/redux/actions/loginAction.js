@@ -1,4 +1,5 @@
 export const loginAction = (currentUser) => {
+  localStorage.user = currentUser
   return {
     type: 'LOGIN',
     payload: currentUser,

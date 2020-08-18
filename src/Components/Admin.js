@@ -9,18 +9,19 @@ const Admin = (props) => {
   const dispatch = useDispatch();
 
   const signOut = () => {
+    localStorage.clear()
     firebase.auth().signOut();
     dispatch(actions.logoutAction())
   }
 
-  useEffect(() => {
-    firebase.firestore().collection('map').get()
-    .then(r => {
-      r.docs.map(doc => {
-        console.log('LOG 1', doc.data());
-      });
-    })
-  })
+  // useEffect(() => {
+  //   firebase.firestore().collection('map').get()
+  //   .then(r => {
+  //     r.docs.map(doc => {
+  //       console.log('LOG 1', doc.data());
+  //     });
+  //   })
+  // })
 
   return (
     <div className='App'>

@@ -1,5 +1,5 @@
 const initialState = {
-    user: false,
+    user: localStorage.user,
 };
 
 const user = (state = initialState, action) => {

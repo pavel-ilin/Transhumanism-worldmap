@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import '../App.css';
 import actions from '../redux/actions/actions'
 import firebase from '../utils/firebaseConfig';
 
-const Login = (props) => {
+const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch();
 
-  const submitLogin = async () => {
+  const submitLogin = () => {
     if (email !== '' && password !== '') {
-      await firebase.auth().signInWithEmailAndPassword(email, password)
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(r => {
+        dispatch(actions.loginAction(r.user.uid))
+      })
       .catch(err => {
         console.log('Error: ', err);
       })
-      let currentUser = await firebase.auth().currentUser
-      dispatch(actions.loginAction(currentUser))
     }
     else {
       console.log('error')
     }
   }
-
 
   return (
     <div className='App'>
@@ -35,10 +35,4 @@ const Login = (props) => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
-};
-
-export default connect(mapStateToProps)(Login)
+export default Login
