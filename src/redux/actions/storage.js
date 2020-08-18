@@ -37,7 +37,6 @@ export const getGeoData = () => {
                             indexAmba++
                         }
                     })
-
                     geodata.features.forEach(item => {
                         if (indexStates >= states.length){
                             return false
@@ -49,11 +48,19 @@ export const getGeoData = () => {
                             indexStates++
                         }
                     })
-
                     dispatch({
                         type: "GET_GEO_DATA",
                         payload: geodata,
                     })
                 })
     })
+}
+
+
+export const addAmbassador = () => {
+    console.log('hello')
+}
+
+export const addState = () => {
+    console.log('hello')
 }
