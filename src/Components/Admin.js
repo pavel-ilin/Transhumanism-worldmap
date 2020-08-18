@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import '../App.css';
 import actions from '../redux/actions/actions'
 import firebase from '../utils/firebaseConfig';
 
-const Admin = (props) => {
+const Admin = () => {
   const dispatch = useDispatch();
 
   const signOut = () => {
@@ -13,15 +13,6 @@ const Admin = (props) => {
     firebase.auth().signOut();
     dispatch(actions.logoutAction())
   }
-
-  // useEffect(() => {
-  //   firebase.firestore().collection('map').get()
-  //   .then(r => {
-  //     r.docs.map(doc => {
-  //       console.log('LOG 1', doc.data());
-  //     });
-  //   })
-  // })
 
   return (
     <div className='App'>

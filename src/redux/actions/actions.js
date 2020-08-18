@@ -1,10 +1,9 @@
-import { loginAction, logoutAction, loadData } from './loginAction';
+import { loginAction, logoutAction } from './loginAction';
 import { getGeoData, addAmbassador, addState } from './storage';
 
 const actions = {
   loginAction,
   logoutAction,
-  loadData,
   getGeoData,
   addAmbassador,
   addState,
