@@ -61,12 +61,12 @@ export const getGeoData = () => {
                         }
                         
                     })
-
+                    
                     dispatch({
                         type: "GET_GEO_DATA",
                         payload: geodata,
-                        allStates: allStates,
-                        allCountries: allCountries,
+                        allStates: allStates.sort(),
+                        allCountries: allCountries.sort(),
                     })
                 })
     })

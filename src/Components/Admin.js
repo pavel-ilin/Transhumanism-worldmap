@@ -19,6 +19,12 @@ const Admin = (props) => {
     })
   }
 
+  const allStates = () => {
+    return props.allStates.map(item => {
+      return <option value={item}>{item}</option>
+    })
+  }
+
   return (
     <div className='App'>
       <div>Admin</div>
@@ -27,16 +33,18 @@ const Admin = (props) => {
           <label>Add ambassador</label>
           <input type="text" placeholder="Enter name"></input>
           <select name="countries" id="country-select">
-            <option value="">--Please choose an option--</option>
+            <option value="">--Select country--</option>
             {allCountries()}
           </select>
           <button>Submit</button>
         </div>
         <div>
-         <label>Add US state</label> 
-         <input type="text" placeholder="Enter name"></input>
+         <label>Add US state party</label> 
+         <input type="text" placeholder="title"></input>
+         <input type="text" placeholder="url"></input>
          <select name="states" id="state-select">
-            <option value="">--Please choose an option--</option>
+            <option value="">--Select US state--</option>
+            {allStates()}
           </select>
           <button>Submit</button>
         </div>

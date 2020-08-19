@@ -5,7 +5,6 @@ const initialState = {
 };
 
 const storage = (state = initialState, action) => {
-    console.log(action)
     switch (action.type) {
         case "GET_GEO_DATA":
           return {
