@@ -1,35 +1,34 @@
 import firebase from '../../utils/firebaseConfig';
-// firebase.firestore().collection('map').doc('features').set(resp.features)
 
 export const getGeoData = () => {
+    let ambassadors = []
+    let states = []
+    let allCountries = []
+    let allStates = []
+
+    firebase.firestore().collection('ambassadors').get() 
+            .then(amba => {amba.forEach(item => {
+                    let ambassador = item.data()
+                    ambassadors.push(ambassador)
+                })
+            })
+    firebase.firestore().collection('usState').get() 
+            .then(state => {
+                state.forEach(item => {
+                    let state = item.data()
+                    states.push(state)
+                })
+            })
+
     return (dispatch) => firebase.storage().ref().child("/CombinedGeoData.json").getDownloadURL()
         .then(function(url) {
-            let ambassadors = []
-            let states = []
-            let allCountries = []
-            let allStates = []
-
-            firebase.firestore().collection('ambassadors').get() 
-                    .then(amba => {
-                        amba.forEach(item => {
-                            let ambassador = item.data()
-                            ambassadors.push(ambassador)
-                        })
-                    })
-            firebase.firestore().collection('usState').get() 
-                    .then(state => {
-                        state.forEach(item => {
-                            let state = item.data()
-                            states.push(state)
-                        })
-                    })
-                    
             fetch(url)
                 .then(r => r.json())
                 .then(resp => {
                     let geodata = resp
                     let indexAmba = 0
                     let indexStates = 0
+
                     geodata.features.forEach(item => {
                         if (indexAmba >= ambassadors.length){
                             return false
@@ -41,6 +40,7 @@ export const getGeoData = () => {
                             indexAmba++
                         }
                     })
+
                     geodata.features.forEach(item => {
                         if (indexStates >= states.length){
                             return false
@@ -52,6 +52,7 @@ export const getGeoData = () => {
                             indexStates++
                         }
                     })
+
                     geodata.features.forEach(item => {
                         if (item.properties.NAME){
                             allStates.push(item.properties.NAME)
@@ -73,10 +74,17 @@ export const getGeoData = () => {
 }
 
 
-export const addAmbassador = () => {
-    console.log('hello')
+export const addAmbassador = (country, ambassador) => {
+    let data = {country: country, ambassador: ambassador}
+    return (dispatch) => {
+        firebase.firestore().collection('ambassadors').doc(country).set(data)
+    }
+    
 }
 
-export const addState = () => {
-    console.log('hello')
+export const addState = (state, party, url) => {
+    let data = {state: state, party: party, url: url}
+    return (dispatch) => {
+        firebase.firestore().collection('usState').doc(state).set(data)
+    }
 }
